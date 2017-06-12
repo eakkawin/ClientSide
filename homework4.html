@@ -1,0 +1,64 @@
+<html>
+<body style="background-color:#FFD906;font-family:monospace;box-sizing:inherit;width:100%;" onload="checkaccount()">
+<div style="text-align:center;width:100%;font-size:3em">
+  <div style="">Last Open</div>
+  <div id="result"></div>
+</div>
+<form>
+<div style="width:22%;margin-left:39%;margin-top:5%;">
+  <div style="font-size:2em;">
+    <span>Account: </span><input id="account" type="text" style="border:none;border-bottom:1px solid black;outline: none;padding:8px;
+    ;margin-left:10px;display:inline-block;overflow:visible;font-size:0.5em;width:100%;background-color:#FFD906;" autofocus>
+  </div>
+  <div style="font-size:2em;margin-top:20px">
+    <span>Password: </span><input type="password" style="border:none;border-bottom:1px solid black;outline: none;padding:8px;
+    ;margin-left:10px;display:inline-block;overflow:visible;font-size:0.5em;width:100%;background-color:#FFD906;" autofocus>
+  </div>
+  <div style="margin-top:40px">
+    <input id="checkbox" type="checkbox" style="-ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;" ><span style="margin-left:10px;font-size:1.5em;">Remember account</span>
+  <button type="submit" style="outline-color:black;display:inline-block;font-size:1.5em;background-color:black;color:#FFD906;border:none;margin-left:5px;padding:5px 15px;" onclick="select()">Login</button>
+  </div>
+</div>
+</form>
+<div style="width:46%;margin-left:27%;margin-top:14%;font-size:1.4em;">
+  SIT, KMUTT Hand Made by Eakkawin Itthirojanakul ,56130500103
+</div>
+  <script>
+  function checkaccount(){
+    if(typeof(localStorage.account) == "undefined"){
+        document.getElementById("account").value = "";
+      }else{
+        document.getElementById("account").value = localStorage.account;
+      }
+  }
+  function select()
+  {
+    if (document.getElementById('checkbox').checked)
+    {
+        localStorage.account = document.getElementById('account').value;
+    } else {
+        localStorage.removeItem("account");
+    }
+  }
+  // Store
+  var objToday = new Date();
+  var dd = objToday.getDate();
+  var mm = objToday.getMonth();
+  var yyyy = objToday.getFullYear();
+  var weekday = new Array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
+  var month = new Array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC');
+  var dayOfWeek = weekday[objToday.getDay()];
+  var monthOfYear = month[mm];
+  var min = objToday.getUTCMinutes();
+  var hour = objToday.getUTCHours()+7;
+  var sec = objToday.getUTCSeconds()
+  today = hour+":"+min+":"+sec+" "+dayOfWeek+' '+dd+' '+monthOfYear+' '+yyyy;
+  document.getElementById("result").innerHTML = localStorage.lastopen;
+  localStorage.lastopen = today;
+  </script>
+</body>
+</html>

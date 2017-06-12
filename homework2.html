@@ -1,0 +1,102 @@
+<html>
+<body>
+  <div>
+Email: <input type='text' id="email" onblur="checkemail()">
+</div>
+<div>
+<input type="radio" id="credit" name="payment" onclick="focusInputCredit()">Credit Card: <input type="text" id="credit-no" onblur="checkpayment()">
+</div>
+<div>
+<input type="radio" id="paypal" name="payment" onclick="focusInputPayPal()">PayPal: <input type="text" id="paypal-no" onblur="checkpayment()">
+</div>
+<div>
+<input type="radio" id="point" name="payment" onclick="focusInputPoint()">Point: <input type="text" id="point-no" onblur="checkpayment()">
+<div>Your Current Point: <span id="random"></span> </div>
+</div>
+<button onclick="cal()">Pay</button>
+
+<script>
+var curpoint = Math.floor(Math.random()*1000+100);
+document.getElementById('random').innerHTML = curpoint;
+
+function cal() {
+  var credit = document.getElementById("credit-no").value;
+  var paypal = document.getElementById("paypal-no").value;
+  var point = document.getElementById("point-no").value;
+  if (point === null && point === "" && credit === null && credit === "" && paypal === "" && paypal === null) {
+    alert("Please Enter Payment");
+  } else {
+    if (point !== null && point !== "") {
+      if (point < curpoint){
+        var newpoint = curpoint-point;
+        document.getElementById("random").innerHTML = newpoint;
+        alert("Suscess");
+      } else {
+        alert("Point not enough for pay");
+      }
+    } else if (credit !== null && credit !== "") {
+      alert("Suscess");
+      document.getElementById("credit-no").value = "";
+    } else if (paypal !== null && paypal !== "") {
+      alert("Suscess");
+      document.getElementById("paypal-no").value = "";
+    }
+  }
+}
+function focusInputCredit(){
+  document.getElementById('credit-no').focus();
+  document.getElementById('paypal-no').blur();
+  document.getElementById('paypal-no').value = "";
+  document.getElementById('point-no').blur();
+  document.getElementById('point-no').value = "";
+}
+function focusInputPayPal(){
+  document.getElementById('credit-no').blur();
+  document.getElementById('credit-no').value = "";
+  document.getElementById('paypal-no').focus();
+  document.getElementById('point-no').blur();
+  document.getElementById('point-no').value = "";
+}
+function focusInputPoint(){
+  document.getElementById('credit-no').blur();
+  document.getElementById('credit-no').value = "";
+  document.getElementById('paypal-no').blur();
+  document.getElementById('paypal-no').value = "";
+  document.getElementById('point-no').focus();
+}
+function checkpayment(){
+  var regex = /\d/g;
+  var credit = document.getElementById('credit-no').value;
+  var paypal = document.getElementById('paypal-no').value;
+  var point = document.getElementById('point-no').value;
+  if(credit!==""){
+    if(regex.test(credit)){
+    }else{
+      alert("It's not a digit")
+    }
+  }else if(paypal!==""){
+    if(regex.test(paypal)){
+    }else{
+      alert("It's not a digit")
+    }
+  }else if(point!=="null"){
+    if(regex.test(point)){
+    }else{
+      alert("It's not a digit")
+    }
+  }
+}
+function checkemail(){
+  var regex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+  var email = document.getElementById('email').value;
+  if(regex.test(email)){
+    alert("ok");
+  }else{
+    document.getElementById('email').value = "";
+    alert("false");
+  }
+}
+
+</script>
+</body>
+</html>

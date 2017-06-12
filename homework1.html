@@ -1,0 +1,28 @@
+<html>
+<body onload='hello()'>
+
+	<button onclick='closeWin();'>Close</button>
+	<script type="text/javascript">
+		var win;
+		function show(){
+			win = window.open("https://www.google.com/","","top=200,left=500,width=400,height=400");
+		}
+		function hello(){
+			window.setTimeout(show,1000);
+		}
+		function closeWin(){
+			win.close();
+			window.close(this);
+		}
+		var objToday = new Date();
+		var dd = objToday.getDate();
+		var mm = objToday.getMonth();
+		var yyyy = objToday.getFullYear()+543;
+		var weekday = new Array('อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์');
+		var month = new Array('มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม');
+		var dayOfWeek = weekday[objToday.getDay()];
+		var monthOfYear = month[mm];
+		today = dayOfWeek+' '+dd+' '+monthOfYear+' พ.ศ.'+yyyy;
+		document.write(today);	</script>
+</body>
+</html>
